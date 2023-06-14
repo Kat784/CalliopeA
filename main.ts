@@ -2,6 +2,7 @@ enum RadioMessage {
     message1 = 49434
 }
 input.onButtonEvent(Button.AB, ButtonEvent.LongClick, function () {
+    radio.setGroup(1)
     basic.showLeds(`
         # # . . .
         # # . . .
