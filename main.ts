@@ -29,7 +29,7 @@ radio.onReceivedNumber(function (receivedNumber) {
             # . . . #
             `)
         basic.setLedColor(0xff0000)
-        basic.pause(4000)
+        basic.pause(3500)
         music.playTone(233, music.beat(BeatFraction.Whole))
         music.playTone(208, music.beat(BeatFraction.Whole))
         music.playTone(185, music.beat(BeatFraction.Whole))
@@ -37,18 +37,21 @@ radio.onReceivedNumber(function (receivedNumber) {
         PunkteA = 0
         PunkteB = 0
     }
-    A_Nutzbar = true
+    Neue_Aufgabe = true
 })
 input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
-    if (A_Nutzbar) {
+    if (Neue_Aufgabe) {
         basic.turnRgbLedOff()
         basic.clearScreen()
         Antwort = 0
         Rechenaufgabe()
         basic.pause(200)
         basic.showNumber(Antwort)
-        A_Nutzbar = false
+        Neue_Aufgabe = false
         Pause = false
+    } else {
+        basic.showString("" + faktor1 + "*" + faktor2)
+        basic.showNumber(Antwort)
     }
 })
 input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
@@ -64,7 +67,7 @@ input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
         basic.setLedColor(0x00ff00)
         radio.sendNumber(3)
         PunkteA += 1
-        A_Nutzbar = true
+        Neue_Aufgabe = true
     } else {
         basic.showLeds(`
             . . . . .
@@ -76,9 +79,9 @@ input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
         basic.setLedColor(0xff0000)
     }
     if (PunkteA == 2) {
+        radio.sendNumber(10)
         Sieg()
         PunkteA = 0
-        radio.sendNumber(10)
     }
 })
 function Rechenaufgabe () {
@@ -167,7 +170,7 @@ let faktor1 = 0
 let Antwort = 0
 let Ergebnis = 0
 let Pause = false
-let A_Nutzbar = false
+let Neue_Aufgabe = false
 let PunkteB = 0
 let PunkteA = 0
 basic.showString("A")
@@ -175,7 +178,7 @@ radio.setGroup(1)
 let _4digit = grove.createDisplay(DigitalPin.C16, DigitalPin.C17)
 PunkteA = 0
 PunkteB = 0
-A_Nutzbar = true
+Neue_Aufgabe = true
 Pause = false
 basic.forever(function () {
     _4digit.bit(PunkteA, 0)
