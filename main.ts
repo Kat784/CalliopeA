@@ -18,7 +18,15 @@ radio.onReceivedNumber(function (receivedNumber) {
         radio.sendNumber(2)
     }
     if (PunkteB == 2) {
-        radio.sendNumber(4)
+        radio.sendNumber(20)
+        basic.showLeds(`
+            . . . . .
+            . # . # .
+            . . . . .
+            . # # # .
+            # . . . #
+            `)
+        basic.pause(2000)
         music.playTone(233, music.beat(BeatFraction.Whole))
         music.playTone(208, music.beat(BeatFraction.Whole))
         music.playTone(185, music.beat(BeatFraction.Whole))
@@ -60,6 +68,7 @@ input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
     if (PunkteA == 2) {
         Sieg()
         PunkteA = 0
+        radio.sendNumber(10)
     }
 })
 function Rechenaufgabe () {
