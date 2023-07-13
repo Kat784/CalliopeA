@@ -15,7 +15,6 @@ radio.onReceivedNumber(function (receivedNumber) {
             `)
         basic.setLedColor(0xffff00)
         PunkteB += 1
-        A_Nutzbar = true
     } else {
         radio.sendNumber(2)
     }
@@ -38,6 +37,7 @@ radio.onReceivedNumber(function (receivedNumber) {
         PunkteA = 0
         PunkteB = 0
     }
+    A_Nutzbar = true
 })
 input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
     if (A_Nutzbar) {
