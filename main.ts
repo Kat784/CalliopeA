@@ -36,6 +36,10 @@ input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
             `)
         basic.setLedColor(0x00ff00)
         radio.sendNumber(3)
+        game.addScore(1)
+        if (game.score() == 5) {
+            Sieg()
+        }
     } else {
         basic.showLeds(`
             . . . . .
@@ -55,6 +59,75 @@ function Rechenaufgabe () {
     basic.showString("" + faktor1 + "*" + faktor2)
     basic.clearScreen()
 }
+function Sieg () {
+    for (let index = 0; index < 1; index++) {
+        music.playMelody("A F B G A C5 B C5 ", 120)
+    }
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . # . .
+        `)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . # . .
+        . # # # .
+        `)
+    basic.showLeds(`
+        . . . . .
+        . . . . .
+        . . # . .
+        . # # # .
+        . # # # .
+        `)
+    basic.showLeds(`
+        . . . . .
+        . . # . .
+        . # # # .
+        . # # # .
+        . # # # .
+        `)
+    basic.showLeds(`
+        . . # . .
+        . # # # .
+        . # # # .
+        . # # # .
+        # # # # #
+        `)
+    basic.showLeds(`
+        . # # # .
+        . # # # .
+        . # # # .
+        # # # # #
+        . . . . .
+        `)
+    basic.showLeds(`
+        . # # # .
+        . # . # .
+        # # # # #
+        . . . . .
+        . . . . .
+        `)
+    basic.showLeds(`
+        . # # # .
+        # # # # #
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+    basic.showLeds(`
+        # # # # #
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+    basic.clearScreen()
+}
 let faktor2 = 0
 let faktor1 = 0
 let Antwort = 0
@@ -62,6 +135,8 @@ let Ergebnis = 0
 basic.showString("A")
 radio.setGroup(1)
 game.setScore(0)
+let _4digit = grove.createDisplay(DigitalPin.C16, DigitalPin.C17)
+_4digit.bit(8, 1)
 basic.forever(function () {
     if (input.isGesture(Gesture.TiltLeft)) {
         Antwort += 1
@@ -70,6 +145,9 @@ basic.forever(function () {
         Antwort += 10
         basic.showNumber(Antwort)
     } else if (input.isGesture(Gesture.ScreenDown)) {
+        Antwort += -1
+        basic.showNumber(Antwort)
+    } else if (input.isGesture(Gesture.Shake)) {
         Antwort = 0
         basic.showNumber(Antwort)
     }
