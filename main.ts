@@ -5,7 +5,6 @@ enum RadioMessage {
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == Ergebnis) {
         radio.sendNumber(1)
-        basic.setLedColor(0xffff00)
         basic.showLeds(`
             . . . . .
             . # . # .
@@ -13,7 +12,7 @@ radio.onReceivedNumber(function (receivedNumber) {
             # # # # #
             . . . . .
             `)
-        basic.pause(500)
+        basic.setLedColor(0xffff00)
     } else {
         radio.sendNumber(2)
     }
@@ -28,19 +27,17 @@ input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
 })
 input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
     if (Antwort == Ergebnis) {
+        basic.showLeds(`
+            . . . . .
+            . # . # .
+            . . . . .
+            # . . . #
+            . # # # .
+            `)
+        basic.setLedColor(0x00ff00)
         radio.sendNumber(3)
         game.addScore(1)
-        basic.setLedColor(0x00ff00)
-        basic.showLeds(`
-            . . . . .
-            . # . # .
-            . . . . .
-            # . . . #
-            . # # # .
-            `)
-        basic.pause(500)
     } else {
-        basic.setLedColor(0xff0000)
         basic.showLeds(`
             . . . . .
             . # . # .
@@ -48,7 +45,7 @@ input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
             . # # # .
             # . . . #
             `)
-        basic.pause(500)
+        basic.setLedColor(0xff0000)
     }
     if (game.score() == 2) {
         Sieg()
@@ -66,7 +63,7 @@ function Sieg () {
     music.playTone(523, music.beat(BeatFraction.Whole))
     music.playTone(659, music.beat(BeatFraction.Whole))
     music.playTone(587, music.beat(BeatFraction.Whole))
-    music.playTone(659, music.beat(BeatFraction.Whole))
+    music.playTone(698, music.beat(BeatFraction.Whole))
     music.playTone(784, music.beat(BeatFraction.Whole))
     music.playTone(698, music.beat(BeatFraction.Whole))
     music.playTone(880, music.beat(BeatFraction.Whole))
@@ -114,7 +111,7 @@ function Sieg () {
         `)
     basic.showLeds(`
         . # # # .
-        . # # # .
+        . # . # .
         # # # # #
         . . . . .
         . . . . .
@@ -143,8 +140,8 @@ basic.showString("A")
 radio.setGroup(1)
 game.setScore(0)
 let _4digit = grove.createDisplay(DigitalPin.C16, DigitalPin.C17)
+_4digit.bit(0, 1)
 basic.forever(function () {
-    _4digit.bit(game.score(), 1)
     if (input.isGesture(Gesture.TiltLeft)) {
         Antwort += 1
         basic.showNumber(Antwort)
