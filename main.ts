@@ -37,9 +37,9 @@ radio.onReceivedNumber(function (receivedNumber) {
         music.playTone(165, music.beat(BeatFraction.Whole))
         PunkteA = 0
         PunkteB = 0
+        Knopf_A_an = true
         basic.clearScreen()
         basic.turnRgbLedOff()
-        Knopf_A_an = true
     }
 })
 input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
