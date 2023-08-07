@@ -15,6 +15,7 @@ radio.onReceivedNumber(function (receivedNumber) {
             `)
         basic.setLedColor(0xffff00)
         PunkteB += 1
+        Knopf_A_an = true
     } else {
         radio.sendNumber(2)
     }
@@ -38,8 +39,8 @@ radio.onReceivedNumber(function (receivedNumber) {
         PunkteB = 0
         basic.clearScreen()
         basic.turnRgbLedOff()
+        Knopf_A_an = true
     }
-    Knopf_A_an = true
 })
 input.onButtonEvent(Button.A, input.buttonEventClick(), function () {
     if (Knopf_A_an) {
@@ -82,7 +83,7 @@ input.onButtonEvent(Button.B, input.buttonEventClick(), function () {
                 `)
             basic.setLedColor(0xff0000)
         }
-        if (PunkteA == 2) {
+        if (PunkteA == 5) {
             radio.sendNumber(10)
             Sieg()
             PunkteA = 0
