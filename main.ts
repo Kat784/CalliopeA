@@ -19,7 +19,7 @@ radio.onReceivedNumber(function (receivedNumber) {
     } else {
         radio.sendNumber(2)
     }
-    if (PunkteB == 2) {
+    if (PunkteB == 5) {
         Knopf_B_an = false
         radio.sendNumber(20)
         basic.showLeds(`
